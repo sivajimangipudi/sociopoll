@@ -1,0 +1,20 @@
+.input-group{
+  margin-bottom: 10px;
+}
+.from-group-addon .input-group-addon{
+  min-width: 120px;
+  text-align: left;
+  color:#d2d6de;
+}
+.from-group-addon .input-group-addon img{
+  max-height: 20px;
+  float: right;
+}
+.from-group-addon .input-group select.form-control{
+  -webkit-appearance: none;
+   -moz-appearance: none;
+   border-radius: 0;
+}
+table.dataTable thead .sorting:after,table.dataTable thead .sorting_asc:after,table.dataTable thead .sorting_desc:after{
+  content: "";
+}

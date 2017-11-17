@@ -1,0 +1,196 @@
+<% title = "Edit Poll" %>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <!-- <section class="content-header">
+      <h1>
+        Blank page
+        <small>it all starts here</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Examples</a></li>
+        <li class="active">Blank page</li>
+      </ol>
+    </section> -->
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="box">
+        <div class="box-header with-border">
+          <h3 class="box-title">Edit Poll</h3>
+
+          <div class="box-tools pull-right">
+          </div>
+        </div>
+
+
+        <div class="box-body">
+          <%- req.flash('message') %>
+          <form action="/poll_update/<%= data.polls.id %>" name="EditPoll" class="EditPoll from-group-addon" method="post" enctype="multipart/form-data">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Title</span>
+                  <input type="text" class="form-control" name="title" class="title" required value="<%= _.isUndefined(data.polls.title) ? '' : data.polls.title %>">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Poll Duration</span>
+                  <input type="text" class="form-control" name="duration" class="duration" required value="<%= _.isUndefined(data.polls.duration) ? '' : data.polls.duration %>">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Option A</span>
+                  <input type="text" class="form-control" name="option_a" class="title" required value="<%= _.isUndefined(data.polls.option_a) ? '' : data.polls.option_a %>">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Option B</span>
+                  <input type="text" class="form-control" name="option_b" class="title" required value="<%= _.isUndefined(data.polls.option_b) ? '' : data.polls.option_b %>">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Option C</span>
+                  <input type="text" class="form-control" name="option_c" class="title" value="<%= _.isUndefined(data.polls.option_c) ? '' : data.polls.option_c %>">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Option D</span>
+                  <input type="text" class="form-control" name="option_d" class="title" value="<%= _.isUndefined(data.polls.option_d) ? '' : data.polls.option_d %>">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Option E</span>
+                  <input type="text" class="form-control" name="option_e" class="title" value="<%= _.isUndefined(data.polls.option_e) ? '' : data.polls.option_e %>">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">My Opinion</span>
+                  <!-- <input type="text" class="form-control" name="correct_option" class="title" value="<%= data.polls.correct_option %>"> -->
+                  <select name="correct_option" class="form-control">
+                    <option value="">Select My Opinion</option>
+                    <option value="option_a" <%= data.polls.correct_option == 'option_a' ? 'selected' : '' %>>Option A</option>
+                    <option value="option_b" <%= data.polls.correct_option == 'option_b' ? 'selected' : '' %>>Option B</option>
+                    <option value="option_c" <%= data.polls.correct_option == 'option_c' ? 'selected' : '' %>>Option C</option>
+                    <option value="option_d" <%= data.polls.correct_option == 'option_d' ? 'selected' : '' %>>Option D</option>
+                    <option value="option_e" <%= data.polls.correct_option == 'option_e' ? 'selected' : '' %>>Option E</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Created By</span>
+                  <select name="created_by" class="form-control" required>
+                    <option value="">Select created by</option>
+                    <% _.each(data.user, function(datas) { %>
+                    <option value="<%= datas.id %>" <%= data.polls.created_by == datas.id ? 'selected' : '' %>><%= datas.first_name %> <%= datas.last_name %> </option>
+                    <% }) %>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Category</span>
+                  <select name="category_id" class="form-control" required>
+                    <option value="">Select category</option>
+                    <% _.each(data.categories, function(datas) { %>
+                    <option value="<%= datas.id %>" <%= data.polls.category_id == datas.id ? 'selected' : '' %>><%= datas.title %> </option>
+                    <% }) %>
+                  </select>
+                </div>
+              </div>
+              <!-- <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Slug</span>
+                  <input type="text" class="form-control" placeholder="Slug" class="slug" name="slug">
+                </div>
+              </div> -->
+              <!-- <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Image</span>
+                  <input type="file" class="form-control" placeholder="Image" name="image">
+                </div>
+              </div> -->
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Trending Poll</span>
+                  <div class="form-control">
+                    <span class="radio-inline">
+                      <label><input type="radio" name="trending" value="true" required <%= data.polls.trending == true ? 'checked' : '' %>> Yes</label>
+                    </span>
+                    <span class="radio-inline">
+                      <label><input type="radio" name="trending" value="false" required <%= data.polls.trending == false ? 'checked' : '' %>> No</label>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Popular Poll</span>
+                  <div class="form-control">
+                    <span class="radio-inline">
+                      <label><input class="minimals" type="radio" name="popular" value="true" required <%= data.polls.popular == true ? 'checked' : '' %>> Yes</label>
+                    </span>
+                    <span class="radio-inline">
+                      <label><input class="minimals" type="radio" name="popular" value="false" required <%= data.polls.popular == false ? 'checked' : '' %>> No</label>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Poll Visibility</span>
+                  <div class="form-control">
+                    <span class="radio-inline">
+                      <label><input type="radio" name="visibility" value="true" required <%= data.polls.visibility == true ? 'checked' : '' %>> Public</label>
+                    </span>
+                    <span class="radio-inline">
+                      <label><input type="radio" name="visibility" value="false" required <%= data.polls.visibility == false ? 'checked' : '' %>> Private</label>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">My Identify</span>
+                  <div class="form-control">
+                    <span class="radio-inline">
+                      <label><input type="radio" name="identify" value="true" required <%= data.polls.identify == true ? 'checked' : '' %>> Username</label>
+                    </span>
+                    <span class="radio-inline">
+                      <label><input type="radio" name="identify" value="false" required <%= data.polls.identify == false ? 'checked' : '' %>> Anonymous</label>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Status</span>
+                  <div class="form-control">
+                    <span class="radio-inline">
+                      <label><input type="radio" name="status" value="true" required <%= data.polls.status == true ? 'checked' : '' %>> Active</label>
+                    </span>
+                    <span class="radio-inline">
+                      <label><input type="radio" name="status" value="false" required <%= data.polls.status == false ? 'checked' : '' %>> In Active</label>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <input type="submit" class="btn btn-sms btn-success" value="Save">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
